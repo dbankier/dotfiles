@@ -1,0 +1,61 @@
+" Default theme
+colorscheme wombat256
+
+" Remap escape key
+inoremap jk <esc>
+
+" Command T opens new tab by default
+let g:CommandTAcceptSelectionMap = '<C-t>'
+let g:CommandTAcceptSelectionTabMap = '<CR>'
+
+" Changes the default ui font
+set guifont=Menlo\ Regular:h13
+set wildignore+="build/**"
+
+" TiShadow Key Bindings
+:map <F6> <Esc>:w<CR>:!tishadow run --update<CR>a
+:imap <F6> <Esc>:w<CR>:!tishadow run --update<CR>a
+:map <S-F6> <Esc>:w<CR>:!tishadow run<CR>a
+:imap <S-F6> <Esc>:w<CR>:!tishadow run<CR>a
+
+" Slows down instant markdown
+let g:instant_markdown_slow = 1
+
+" reselect visual block after indent/outdent via: tilvim.com
+vnoremap < <gv
+vnoremap > >gv
+
+" Spell Checking on
+set spell
+
+" Alloy - window splits for view, style and controller
+function OpenAlloy()
+  let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
+  let s:style=substitute(expand('%:r'),"controllers","styles","").".tss" 
+  exec '80vsp' s:style 
+  set filetype=javascript
+  exec 'sp' s:view
+  set filetype=jade
+endfunction
+
+if has('autocmd')
+  " Change scheme and spell check based on file type
+	au BufEnter * colorscheme wombat256 | set nospell
+  au BufEnter *.markdown colorscheme peaksea | set spell
+  au BufEnter *.md colorscheme peaksea | set spell
+  "Alloy stuff
+  au BufRead *.tss set filetype=javascript
+  au BufRead */controllers/*.js call OpenAlloy()
+  au BufRead,BufNewFile *.json set filetype=json 
+endif
+
+" closetag fix (for xml)
+let b:unaryTagsStack=""
+
+" vim clashes with iTerm2 on Command-T
+nnoremap <C-f> :CtrlP<cr>
+inoremap <C-f> <esc>:CtrlP<cr>
+
+" change status line based on mode
+au InsertEnter * hi StatusLine ctermbg=52
+au InsertLeave * hi StatusLine ctermbg=8

@@ -1,0 +1,14 @@
+[user]
+	name = David Bankier
+	email = dbankier@hotmail.com
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[alias]
+  st = status
+  di = diff
+  ci = commit
+  co = checkout
+  br = branch
+  llog = log --date=local

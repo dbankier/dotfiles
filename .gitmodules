@@ -1,0 +1,30 @@
+[submodule "janus/vim-instant-markdown"]
+	path = janus/vim-instant-markdown
+	url = https://github.com/suan/vim-instant-markdown
+[submodule "janus/closetag.vim"]
+	path = janus/closetag.vim
+	url = https://github.com/vim-scripts/closetag.vim
+[submodule "janus/YankRing.vim"]
+	path = janus/YankRing.vim
+	url = git://github.com/vim-scripts/YankRing.vim.git
+[submodule "janus/ZenCoding.vim"]
+	path = janus/ZenCoding.vim
+	url = https://github.com/vim-scripts/ZenCoding.vim
+[submodule "janus/JSON.vim"]
+	path = janus/JSON.vim
+	url = https://github.com/vim-scripts/JSON.vim
+[submodule "janus/vim-tmux-navigator"]
+	path = janus/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "janus/vim-jade"]
+	path = janus/vim-jade
+	url = https://github.com/digitaltoad/vim-jade
+[submodule "janus/typescript-vim"]
+	path = janus/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim
+[submodule "janus/vim-copy-as-rtf"]
+	path = janus/vim-copy-as-rtf
+	url = https://github.com/zerowidth/vim-copy-as-rtf
+[submodule "janus/SnappiTi.vim"]
+	path = janus/SnappiTi.vim
+	url = https://github.com/dbankier/SnappiTi.vim
