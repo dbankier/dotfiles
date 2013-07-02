@@ -33,3 +33,6 @@ done
 
 echo "Copying zsh theme"
 cp $dir/db.zsh-theme ~/.oh-my-zsh/themes
+
+echo "Copying Battery script"
+sudo cp battery /usr/bin; sudo chmod 755 /usr/bin/battery

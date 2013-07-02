@@ -28,3 +28,7 @@ specific. The `tmux.conf` is not very interesting and put together by
 googling. My zsh theme is a modification of an existing one, but I don't
 remember which.
 
+The battery script is basically taken from
+https://github.com/Goles/Battery with minor tweaks and removing spark
+usage.
+
