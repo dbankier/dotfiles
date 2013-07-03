@@ -47,6 +47,8 @@ if has('autocmd')
   au BufRead *.tss set filetype=javascript
   au BufRead */controllers/*.js call OpenAlloy()
   au BufRead,BufNewFile *.json set filetype=json 
+  "Autoformatting off
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 endif
 
 " closetag fix (for xml)
