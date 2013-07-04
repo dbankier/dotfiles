@@ -26,6 +26,8 @@ alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/
 alias ftp-start='sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist'
 alias ftp-stop='sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.plist'
 
+alias :q=exit
+
 #vim key bindings
 bindkey -v
 export EDITOR='vim'
