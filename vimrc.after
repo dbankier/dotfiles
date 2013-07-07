@@ -61,3 +61,6 @@ inoremap <C-f> <esc>:CtrlP<cr>
 " change status line based on mode
 au InsertEnter * hi StatusLine ctermbg=52
 au InsertLeave * hi StatusLine ctermbg=8
+
+"reload files changed outside
+set autoread
