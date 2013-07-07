@@ -64,3 +64,11 @@ au InsertLeave * hi StatusLine ctermbg=8
 
 "reload files changed outside
 set autoread
+
+" status line changes
+set statusline=
+set statusline +=%{fugitive#statusline()}
+set statusline +=\ %<%F%*            "full path
+set statusline +=%m%*                "modified flag
+set statusline +=%=%5l%*             "current line
+set statusline +=/%L%*               "total lines
