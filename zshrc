@@ -15,7 +15,6 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/usr/X11/bin:/Users/dbankier/bin:/usr/local/scala/bin/:/usr/local/grails/bin:/Users/dbankier/android-sdk-mac_86/tools/:/Users/dbankier/android-sdk-mac_86/platform-tools/
 
 alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
-alias git-update='for i in `git branch | sed 's/^.//'`; do git checkout $i ; git pull origin $i; done'
 alias jsgrep='find . | grep \.js | xargs grep'
 alias scgrep='find . | grep \.scala | xargs grep'
 
@@ -28,9 +27,21 @@ alias ftp-stop='sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.pl
 
 alias :q=exit
 
+# Java versions switcher (OSX)
+alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
+
+function java_use() {
+  export JAVA_HOME=$(/usr/libexec/java_home -v $1)
+  export PATH=$JAVA_HOME/bin:$PATH
+  java -version
+}
+
+
 #vim key bindings
 bindkey -v
 export EDITOR='vim'
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
