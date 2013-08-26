@@ -7,3 +7,19 @@ snippet addE
 	});
 snippet newr
 	new (require("/${1}"))(${2});
+snippet camera
+	Ti.Media.showCamera({
+	  allowEditing: true,
+	  saveToPhotoGallery: false,
+	  success: function(e) {
+	    var picture = e.media;
+	    ${1}
+	  }
+	});
+snippet email
+	var emailDialog = Ti.UI.createEmailDialog({
+	  subject: 'TiSiren Picture',
+	  messageBody: '\n\nSent From TiSiren'
+	});
+	emailDialog.addAttachment(e.media);
+	emailDialog.open();
