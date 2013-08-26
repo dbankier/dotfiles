@@ -32,7 +32,7 @@ set spell
 function OpenAlloy()
   let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
   let s:style=substitute(expand('%:r'),"controllers","styles","").".tss" 
-  exec '80vsp' s:style 
+  exec '60vsp' s:style 
   set filetype=javascript
   exec 'sp' s:view
   set filetype=jade
@@ -45,7 +45,8 @@ if has('autocmd')
   au BufEnter *.md colorscheme peaksea | set spell
   "Alloy stuff
   au BufRead *.tss set filetype=javascript
-  au BufRead */controllers/*.js call OpenAlloy()
+  au BufRead *.jmk set filetype=javascript
+  "au BufRead */controllers/*.js call OpenAlloy()
   au BufRead,BufNewFile *.json set filetype=json 
   "Autoformatting off
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -55,6 +56,8 @@ endif
 let b:unaryTagsStack=""
 
 " vim clashes with iTerm2 on Command-T
+nnoremap <C-l> :call OpenAlloy()<cr>
+inoremap <C-l> <esc>:call OpenAlloy()<cr>
 nnoremap <C-f> :CtrlP<cr>
 inoremap <C-f> <esc>:CtrlP<cr>
 
