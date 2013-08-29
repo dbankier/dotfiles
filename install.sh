@@ -41,8 +41,9 @@ echo "Installing Vundle"
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 echo "Install Vundle Bundles"
 vim +BundleInstall +qall
+echo "Installing tern_for_vim"
+
+cd ~/.vim/bundle/tern_for_vim && `which npm` install 
 echo "Installing YouCompleteMe"
-cd ~/.vim/bundle/YouCompleteMe && ./install.sh`
-echo "Installing ultisnips"
-cd ~/.vim/bundle/ultisnips && npm install 
+cd ~/.vim/bundle/YouCompleteMe && ./install.sh
 
