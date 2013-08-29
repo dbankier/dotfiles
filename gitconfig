@@ -12,3 +12,5 @@
   co = checkout
   br = branch
   llog = log --date=local
+[github]
+	user = dbankier

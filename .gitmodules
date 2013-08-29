@@ -28,3 +28,6 @@
 [submodule "janus/SnappiTi.vim"]
 	path = janus/SnappiTi.vim
 	url = https://github.com/dbankier/SnappiTi.vim
+[submodule "janus/pipe2eval"]
+	path = janus/pipe2eval
+	url = https://github.com/zweifisch/pipe2eval

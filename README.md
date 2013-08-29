@@ -6,8 +6,8 @@ It's a terminal thing. You really want to know?
 
 I used these to kick start
 
- * [Janus](https://github.com/carlhuda/janus)
-   `curl -Lo- https://bit.ly/janus-bootstrap | bash`
+ * [Vundle](https://github.com/gmarik/vundle) (No longer using janus)
+   Install handled by install script
  * [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
    `curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh`
  * [tmux](http://tmux.sourceforge.net/)
@@ -18,8 +18,7 @@ I used these to kick start
 ## Install
 
  * clone the repo so the contents end up in `~/dotfiles`
- * install the submodules: `cd ~/dotfiles && git submodule update --init`
- * run the install script: `chmod +x install.sh && ./install.sh`
+ * run the install script: `cd dotfiles && chmod +x install.sh && ./install.sh`
 
 ## Other bits
 

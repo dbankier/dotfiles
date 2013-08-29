@@ -12,7 +12,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/usr/X11/bin:/Users/dbankier/bin:/usr/local/scala/bin/:/usr/local/grails/bin:/Users/dbankier/android-sdk-mac_86/tools/:/Users/dbankier/android-sdk-mac_86/platform-tools/
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/Users/david/bin:/usr/local/scala/bin:/usr/local/grails/bin:/Users/david/android-sdk-mac_86/tools:/Users/david/android-sdk-mac_86/platform-tools
 
 alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
 alias jsgrep='find . | grep \.js | xargs grep'
@@ -40,6 +40,9 @@ function java_use() {
 #vim key bindings
 bindkey -v
 export EDITOR='vim'
+
+# for pipe2eval vim plugin
+export PIP2EVAL_TMP_FILE_PATH=/tmp/shms
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

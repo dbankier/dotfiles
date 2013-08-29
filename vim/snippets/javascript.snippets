@@ -1,0 +1,34 @@
+snippet rui "require definition"
+var $1 = require("/${2:ui}/${1}");
+endsnippet
+
+snippet addE "add event listener"
+addEventListener("${1}", function(e) {
+	${2}
+});
+endsnippet
+
+snippet newr "new direct require"
+new (require("/${1}"))(${2});
+endsnippet
+
+snippet camera "show camera and take a phot"
+Ti.Media.showCamera({
+	allowEditing: true,
+	saveToPhotoGallery: false,
+	success: function(e) {
+		var picture = e.media;
+		$1
+	}
+});
+endsnippet
+
+snippet email "email dialog"
+var emailDialog = Ti.UI.createEmailDialog({
+	subject: 'TiSiren Picture',
+	messageBody: '\n\nSent From TiSiren'
+});
+emailDialog.addAttachment(e.media);
+emailDialog.open();
+endsnippet
+

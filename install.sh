@@ -9,7 +9,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="gitconfig tmux.conf vimrc.after zshrc"    # list of files/folders to symlink in homedir
+files="gitconfig tmux.conf vimrc zshrc"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -36,3 +36,13 @@ cp $dir/db.zsh-theme ~/.oh-my-zsh/themes
 
 echo "Copying Battery script"
 sudo ln -s ~/dotfiles/battery /usr/bin/battery
+
+echo "Installing Vundle"
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+echo "Install Vundle Bundles"
+vim +BundleInstall +qall
+echo "Installing YouCompleteMe"
+cd ~/.vim/bundle/YouCompleteMe && ./install.sh`
+echo "Installing ultisnips"
+cd ~/.vim/bundle/ultisnips && npm install 
+
