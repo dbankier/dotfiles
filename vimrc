@@ -42,6 +42,13 @@ filetype plugin indent on
 "" SETTINGS
 ""
 
+" clipboard
+set clipboard=unnamed
+
+" backup and swap dirs
+set backupdir^=~/.vim/_backup//    " where to put backup files.
+set directory^=~/.vim/_temp//      " where to put swap files.
+
 " Default theme
 syntax enable 
 colorscheme wombat256
