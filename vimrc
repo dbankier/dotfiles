@@ -26,9 +26,12 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'mattn/gist-vim'
 Bundle 'suan/vim-instant-markdown'
 "Syntax
+Bundle 'scrooloose/syntastic'
 Bundle 'elzr/vim-json'
 Bundle 'digitaltoad/vim-jade'
-Bundle "pangloss/vim-javascript"
+Bundle 'pangloss/vim-javascript'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'leafgarland/typescript-vim'
 " Quick text"
 Bundle 'mattn/emmet-vim'
 Bundle 'dbankier/SnappiTi.vim'
@@ -124,6 +127,15 @@ nnoremap <leader>gp :Gpush<CR>
 
 "nerdtree
 noremap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
+let g:NERDTreeHijackNetrw = 0 " Stop NERDTree from hijacking netrw
+let g:loaded_netrw        = 1 " Disable netrw
+let g:loaded_netrwPlugin  = 1 " Disable netrw
+au VimEnter * :NERDTreeToggle
+au VimEnter * :wincmd p
+
+
+autocmd VimEnter * NERDTree
+
 " vim clashes with iTerm2 on Command-T
 nnoremap <leader>l :call OpenAlloy()<cr>
 inoremap <leader>l <esc>:call OpenAlloy()<cr>
