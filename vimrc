@@ -32,6 +32,7 @@ Bundle 'digitaltoad/vim-jade'
 Bundle 'pangloss/vim-javascript'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'leafgarland/typescript-vim'
+Bundle 'tpope/vim-markdown'
 " Quick text"
 Bundle 'mattn/emmet-vim'
 Bundle 'dbankier/SnappiTi.vim'
