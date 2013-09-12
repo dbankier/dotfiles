@@ -131,11 +131,8 @@ noremap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 let g:NERDTreeHijackNetrw = 0 " Stop NERDTree from hijacking netrw
 let g:loaded_netrw        = 1 " Disable netrw
 let g:loaded_netrwPlugin  = 1 " Disable netrw
-au VimEnter * :NERDTreeToggle
+au VimEnter * if &filetype ==# '' | :NERDTreeToggle | endif
 au VimEnter * :wincmd p
-
-
-autocmd VimEnter * NERDTree
 
 " vim clashes with iTerm2 on Command-T
 nnoremap <leader>l :call OpenAlloy()<cr>
