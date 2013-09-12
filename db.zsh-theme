@@ -1,5 +1,12 @@
+tiver() {
+  curr=`tiversion`
+  if [[ -n $curr ]]; then
+    echo "("$curr")"
+  fi
+}
 
-PROMPT='$fg_bold[blue][ $fg[red]%t $fg_bold[blue]| $fg[red]%~ $(git_prompt_info)$fg[cyan] $(echo "("`tiversion`")")$fg_bold[blue] ]$reset_color
+
+PROMPT='$fg_bold[blue][ $fg[red]%t $fg_bold[blue]| $fg[red]%~ $(git_prompt_info)$fg[cyan] $(tiver)$fg_bold[blue] ]$reset_color
  $ '
 # git theming
 ZSH_THEME_GIT_PROMPT_PREFIX="$fg_bold[green]("
