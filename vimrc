@@ -140,6 +140,9 @@ inoremap <leader>l <esc>:call OpenAlloy()<cr>
 nnoremap <C-f> :CtrlP<cr>
 inoremap <C-f> <esc>:CtrlP<cr>
 
+" stop .tern-port commands
+let g:tern#arguments = ["--no-port-file"]
+
 
 ""
 "" AUTO COMMANDS
