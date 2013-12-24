@@ -82,7 +82,7 @@ set spell
 " Changes the default ui font
 set guifont=Menlo\ Regular:h13
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
-set wildignore+="build/**"
+set wildignore+=*/build/**
 
 "reload files changed outside
 set autoread
