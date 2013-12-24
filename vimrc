@@ -21,6 +21,7 @@ Bundle 'jeetsukumaran/vim-buffergator'
 Bundle 'kien/ctrlp.vim'
 Bundle 'ZoomWin'
 Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'vim-scripts/camelcasemotion'
 " docs
 Bundle 'tpope/vim-fugitive'
 Bundle 'mattn/gist-vim'
@@ -34,6 +35,7 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'tpope/vim-markdown'
 " Quick text"
+Bundle 'tpope/vim-surround'
 Bundle 'mattn/emmet-vim'
 Bundle 'dbankier/SnappiTi.vim'
 Bundle 'vim-scripts/YankRing.vim'
@@ -117,6 +119,14 @@ let g:instant_markdown_slow = 1
 " reselect visual block after indent/outdent via: tilvim.com
 vnoremap < <gv
 vnoremap > >gv
+
+" CamelCase movement: via tilvim.com
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
 
 "fugitive
 nnoremap <leader>gb :Gblame<CR>
