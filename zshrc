@@ -32,8 +32,8 @@ alias pg-stop='pg_ctl -D ~/Library/Application\ Support/Postgres/var stop -s -m 
 
 alias :q=exit
 alias :qa='tmux kill-session'
-alias ai='alloy compile --config platform=ios && tishadow run --update'
-alias aa='alloy compile --config platform=android && tishadow run --update'
+
+alias doc2md='textutil -convert html file.doc -stdout | pandoc -f html -t markdown -o file.md'
 
 # Java versions switcher (OSX)
 alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
