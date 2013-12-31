@@ -98,7 +98,8 @@ function! AirlineInit()
   set laststatus=2
   let g:airline#extensions#hunks#enabled = 0
   let g:airline_section_x = airline#section#create([''])  
-  let g:airline_section_y = airline#section#create([''])  
+  let g:airline_section_y = airline#section#create(['%l:%c'])  
+  let g:airline_section_z = airline#section#create(['%P'])  
 endfunction
 autocmd VimEnter * call AirlineInit()
 
