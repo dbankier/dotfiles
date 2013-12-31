@@ -23,6 +23,7 @@ Bundle 'ZoomWin'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'terryma/vim-multiple-cursors'
 " docs
 Bundle 'tpope/vim-fugitive'
 Bundle 'mattn/gist-vim'
