@@ -25,8 +25,10 @@ Bundle 'vim-scripts/camelcasemotion'
 " docs
 Bundle 'tpope/vim-fugitive'
 Bundle 'mattn/gist-vim'
+Bundle 'airblade/vim-gitgutter'
 Bundle 'suan/vim-instant-markdown'
 "Syntax
+Bundle 'bling/vim-airline'
 Bundle 'scrooloose/syntastic'
 Bundle 'elzr/vim-json'
 Bundle 'digitaltoad/vim-jade'
@@ -89,13 +91,16 @@ set wildignore+=*/build/**
 "reload files changed outside
 set autoread
 
-" status line changes
-set statusline=
-set statusline +=%{fugitive#statusline()}
-set statusline +=\ %<%F%*            "full path
-set statusline +=%m%*                "modified flag
-set statusline +=%=%5l%*             "current line
-set statusline +=/%L%*               "total lines
+" airline - init
+
+function! AirlineInit()
+  let g:airline_powerline_fonts = 1
+  set laststatus=2
+  let g:airline#extensions#hunks#enabled = 0
+  let g:airline_section_x = airline#section#create([''])  
+  let g:airline_section_y = airline#section#create([''])  
+endfunction
+autocmd VimEnter * call AirlineInit()
 
 ""
 "" MAPPINGS
@@ -159,7 +164,7 @@ let g:tern#arguments = ["--no-port-file"]
 ""
 
 " Alloy - window splits for view, style and controller
-function OpenAlloy()
+function! OpenAlloy()
   let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
   let s:style=substitute(expand('%:r'),"controllers","styles","").".tss" 
   exec '60vsp' s:style 
