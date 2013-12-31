@@ -37,6 +37,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'tpope/vim-markdown'
+Bundle 'mustache/vim-mode'
 " Quick text"
 Bundle 'tpope/vim-surround'
 Bundle 'mattn/emmet-vim'
@@ -154,6 +155,8 @@ au VimEnter * :wincmd p
 " vim clashes with iTerm2 on Command-T
 nnoremap <leader>l :call OpenAlloy()<cr>
 inoremap <leader>l <esc>:call OpenAlloy()<cr>
+nnoremap <leader>k :call OpenAlloyLTSS()<cr>
+inoremap <leader>k <esc>:call OpenAlloyLTSS()<cr>
 nnoremap <C-f> :CtrlP<cr>
 inoremap <C-f> <esc>:CtrlP<cr>
 
@@ -174,7 +177,14 @@ function! OpenAlloy()
   exec 'sp' s:view
   set filetype=jade
 endfunction
-
+function!  OpenAlloyLTSS()
+  let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
+  let s:style=substitute(expand('%:r'),"controllers","styles","").".ltss" 
+  exec '60vsp' s:style 
+  set filetype=javascript
+  exec 'sp' s:view
+  set filetype=jade
+endfunction
 if has('autocmd')
   " Change scheme and spell check based on file type
   au BufEnter * colorscheme wombat256 | set nospell
@@ -182,7 +192,9 @@ if has('autocmd')
   au BufEnter *.md colorscheme peaksea | set spell
   "Alloy stuff
   au BufRead *.tss set filetype=javascript
+  au BufRead *.ltss set filetype=javascript
   au BufRead *.jmk set filetype=javascript
+  au BufRead *.ejs set filetype=html
   "au BufRead */controllers/*.js call OpenAlloy()
   au BufRead,BufNewFile *.json set filetype=json 
   "Autoformatting off
