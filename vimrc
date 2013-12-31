@@ -22,6 +22,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'ZoomWin'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'vim-scripts/camelcasemotion'
+Bundle 'tpope/vim-unimpaired'
 " docs
 Bundle 'tpope/vim-fugitive'
 Bundle 'mattn/gist-vim'
