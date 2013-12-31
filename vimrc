@@ -102,6 +102,19 @@ function! AirlineInit()
   let g:airline_section_x = airline#section#create([''])  
   let g:airline_section_y = airline#section#create(['%l:%c'])  
   let g:airline_section_z = airline#section#create(['%P'])  
+  let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '^V' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '^S' : 'S',
+      \ }
 endfunction
 autocmd VimEnter * call AirlineInit()
 
