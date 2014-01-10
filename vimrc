@@ -23,7 +23,6 @@ Bundle 'ZoomWin'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'tpope/vim-unimpaired'
-Bundle 'terryma/vim-multiple-cursors'
 " docs
 Bundle 'tpope/vim-fugitive'
 Bundle 'mattn/gist-vim'
@@ -44,6 +43,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'mattn/emmet-vim'
 Bundle 'dbankier/SnappiTi.vim'
 Bundle 'vim-scripts/YankRing.vim'
+Bundle 'terryma/vim-multiple-cursors'
 Bundle 'zerowidth/vim-copy-as-rtf'
 Bundle 'vim-scripts/closetag.vim'
 
@@ -198,6 +198,13 @@ function!  OpenAlloyLTSS()
   set filetype=javascript
   exec 'sp' s:view
   set filetype=jade
+endfunction
+function! MDFix() 
+  <esc>
+  %s/\^\(\d\)\^/<sup>\1<\/sup>/g
+  %s/\\\n\n//g
+  %s/\(\w\)\*\*\(\w\)/\1 \2/gc
+  %s/\(\w\+\*\)\(\w\)/\1 \2/gc
 endfunction
 if has('autocmd')
   " Change scheme and spell check based on file type
