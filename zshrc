@@ -15,12 +15,11 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/Users/david/bin:/usr/local/scala/bin:/usr/local/grails/bin:/Users/david/android-sdk-mac_86/tools:/Users/david/android-sdk-mac_86/platform-tools
 
 alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
-alias jsgrep='find . | grep \.js | xargs grep'
-alias scgrep='find . | grep \.scala | xargs grep'
+alias jsgrep='find . -type f | grep \.js | xargs grep'
+alias scgrep='find . -type f | grep \.scala | xargs grep'
 
 export CLICOLOR=1
 alias ll='ls -l'
-alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc'
 
 #ftp
 alias ftp-start='sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist'
@@ -65,4 +64,9 @@ source ~/.nvm/nvm.sh
 # for ImageMagick
 export MAGICK_HOME="$HOME/ImageMagick-6.8.6"
 export PATH="$MAGICK_HOME/bin:$PATH"
+export DYLD_LIBRARY_PATH=/Users/david/ImageMagick-6.8.6/lib
+
+# move/rename multiple files - http://www.mfasold.net/blog/2008/11/moving-or-renaming-multiple-files/
+autoload -U zmv
+alias mmv='noglob zmv -W'
 
