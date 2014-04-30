@@ -37,6 +37,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'tpope/vim-markdown'
+Bundle 'wavded/vim-stylus'
 Bundle 'mustache/vim-mode'
 " Quick text"
 Bundle 'tpope/vim-surround'
@@ -167,10 +168,13 @@ au VimEnter * if &filetype ==# '' | :NERDTreeToggle | endif
 au VimEnter * :wincmd p
 
 " vim clashes with iTerm2 on Command-T
-nnoremap <leader>l :call OpenAlloy()<cr>
-inoremap <leader>l <esc>:call OpenAlloy()<cr>
-nnoremap <leader>k :call OpenAlloyLTSS()<cr>
-inoremap <leader>k <esc>:call OpenAlloyLTSS()<cr>
+nnoremap <leader>lx :call OpenAlloyXML()<cr>
+inoremap <leader>lx <esc>:call OpenAlloyXML()<cr>
+nnoremap <leader>lj :call OpenAlloy()<cr>
+inoremap <leader>lj <esc>:call OpenAlloy()<cr>
+nnoremap <leader>lt :call OpenAlloyLTSS()<cr>
+inoremap <leader>lt <esc>:call OpenAlloyLTSS()<cr>
+vnoremap <leader>lp :w ! ts repl --pipe<cr>
 nnoremap <C-f> :CtrlP<cr>
 inoremap <C-f> <esc>:CtrlP<cr>
 
@@ -191,6 +195,15 @@ function! OpenAlloy()
   exec 'sp' s:view
   set filetype=jade
 endfunction
+function! OpenAlloyXML()
+  let s:view=substitute(expand('%:r'),"controllers","views","").".xml" 
+  let s:style=substitute(expand('%:r'),"controllers","styles","").".tss" 
+  exec '60vsp' s:style 
+  set filetype=javascript
+  exec 'sp' s:view
+  set filetype=xml
+endfunction
+
 function!  OpenAlloyLTSS()
   let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
   let s:style=substitute(expand('%:r'),"controllers","styles","").".ltss" 
@@ -247,5 +260,4 @@ let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'snippets']
 " change status line based on mode
 au InsertEnter * hi StatusLine ctermbg=52
 au InsertLeave * hi StatusLine ctermbg=8
-
 
