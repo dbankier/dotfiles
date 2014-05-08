@@ -70,3 +70,21 @@ export DYLD_LIBRARY_PATH=/Users/david/ImageMagick-6.8.6/lib
 autoload -U zmv
 alias mmv='noglob zmv -W'
 
+# originally based on - https://bitbucket.org/hannesr/fillbucket/src/241495090d75dddfe9842ef2c60df968190dccf4/fillbucket?at=master
+function kickbucket() {
+  echo "Username:"
+  read username
+
+  stty_orig=`stty -g`
+  stty -echo        
+  echo "Password:"
+  read password
+  stty $stty_orig  
+
+  echo "Repository Name:"
+  read repo
+  curl --user $username:$password https://api.bitbucket.org/1.0/repositories/ --data name=$repo --data is_private='true'
+  git remote add origin https://$username@bitbucket.org/$username/${repo// /-}.git
+  git push -u origin --all
+  git push -u origin --tags
+}
