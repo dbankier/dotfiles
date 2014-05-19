@@ -7,7 +7,7 @@ ZSH_THEME="db"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git colorize heroku)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -26,8 +26,8 @@ alias ftp-start='sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.pli
 alias ftp-stop='sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.plist'
 
 #pg
-alias pg-start='pg_ctl -D ~/Library/Application\ Support/Postgres/var -l server.log start'
-alias pg-stop='pg_ctl -D ~/Library/Application\ Support/Postgres/var stop -s -m fast'
+alias pg-start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias pg-stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 
 alias :q=exit
 alias :qa='tmux kill-session'
