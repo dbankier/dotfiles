@@ -240,7 +240,7 @@ let b:unaryTagsStack=""
 
 " Making UltiSnips and YouCompleteMe play nicely
 function! g:UltiSnips_Complete()
-  call UltiSnips_ExpandSnippet()
+  call UltiSnips#ExpandSnippet()
   if g:ulti_expand_res == 0
     if pumvisible()
       return "\<C-n>"
@@ -254,8 +254,8 @@ function! g:UltiSnips_Complete()
   return ""
 endfunction
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-let g:UltiSnipsSnippetsDir = '~/.vim/snippets/'
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'snippets']
+let g:UltiSnipsSnippetsDir = '~/.vim/ultisnips/'
+let g:UltiSnipsSnippetDirectories = ['ultisnips']
 
 " change status line based on mode
 au InsertEnter * hi StatusLine ctermbg=52
