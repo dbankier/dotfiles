@@ -174,6 +174,8 @@ nnoremap <leader>lj :call OpenAlloy()<cr>
 inoremap <leader>lj <esc>:call OpenAlloy()<cr>
 nnoremap <leader>lt :call OpenAlloyLTSS()<cr>
 inoremap <leader>lt <esc>:call OpenAlloyLTSS()<cr>
+nnoremap <leader>ls :call OpenAlloySTSS()<cr>
+inoremap <leader>ls <esc>:call OpenAlloySTSS()<cr>
 vnoremap <leader>lp :w ! ts repl --pipe<cr>
 nnoremap <C-f> :CtrlP<cr>
 inoremap <C-f> <esc>:CtrlP<cr>
@@ -212,6 +214,16 @@ function!  OpenAlloyLTSS()
   exec 'sp' s:view
   set filetype=jade
 endfunction
+
+function!  OpenAlloySTSS()
+  let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
+  let s:style=substitute(expand('%:r'),"controllers","styles","").".stss" 
+  exec '60vsp' s:style 
+  set filetype=scss
+  exec 'sp' s:view
+  set filetype=jade
+endfunction
+
 function! MDFix() 
   <esc>
   %s/\^\(\d\)\^/<sup>\1<\/sup>/g
