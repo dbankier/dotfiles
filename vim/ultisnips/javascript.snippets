@@ -1,3 +1,33 @@
+## GENERAL JS
+
+# Function
+snippet fun
+function ${1:function_name} (${2:argument}) {
+${3:// body...}
+}
+endsnippet
+
+# Anonymous Function
+snippet f
+function(${1}) {${2}};
+endsnippet
+
+# if
+snippet if
+if (${1:true}) {${2}}
+endsnippet
+
+# if ... else
+snippet ife
+if (${1:true}) {${2}}
+else{${3}}
+endsnippet
+
+# tertiary conditional
+snippet t
+${1:/* condition */} ? ${2:a} : ${3:b}
+endsnippet
+
 snippet rui "require definition"
 var $1 = require("/${2:ui}/${1}");
 endsnippet
@@ -6,7 +36,7 @@ snippet req "require npm module"
 var $1 = require("${1}");
 endsnippet
 
-snippet addE "add event listener"
+snippet event "add event listener"
 addEventListener("${1}", function(e) {
 	${2}
 });
@@ -15,6 +45,9 @@ endsnippet
 snippet newr "new direct require"
 new (require("/${1}"))(${2});
 endsnippet
+
+
+## TITANIUM SNIPPETS
 
 snippet camera "show camera and take a phot"
 Ti.Media.showCamera({
