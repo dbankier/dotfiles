@@ -29,7 +29,7 @@ Bundle 'mattn/gist-vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'suan/vim-instant-markdown'
 "Syntax
-Bundle 'bling/vim-airline'
+Bundle 'wookiehangover/jshint.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'elzr/vim-json'
 Bundle 'digitaltoad/vim-jade'
@@ -39,6 +39,8 @@ Bundle 'leafgarland/typescript-vim'
 Bundle 'tpope/vim-markdown'
 Bundle 'wavded/vim-stylus'
 Bundle 'mustache/vim-mode'
+Bundle 'groenewege/vim-less'
+Bundle 'cakebaker/scss-syntax.vim'
 " Quick text"
 Bundle 'tpope/vim-surround'
 Bundle 'mattn/emmet-vim'
@@ -94,31 +96,6 @@ set wildignore+=*/build/**
 
 "reload files changed outside
 set autoread
-
-" airline - init
-
-function! AirlineInit()
-  let g:airline_powerline_fonts = 1
-  set laststatus=2
-  let g:airline#extensions#hunks#enabled = 0
-  let g:airline_section_x = airline#section#create([''])  
-  let g:airline_section_y = airline#section#create(['%l:%c'])  
-  let g:airline_section_z = airline#section#create(['%P'])  
-  let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '^V' : 'V',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '^S' : 'S',
-      \ }
-endfunction
-autocmd VimEnter * call AirlineInit()
 
 ""
 "" MAPPINGS
