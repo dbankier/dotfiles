@@ -12,7 +12,7 @@ plugins=(git colorize heroku)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/Users/david/bin:/usr/local/scala/bin:/usr/local/grails/bin:/Users/david/android-sdk-mac_86/tools:/Users/david/android-sdk-mac_86/platform-tools
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/Users/david/bin:/usr/local/scala/bin:/usr/local/grails/bin:/Users/david/Android/tools:/Users/david/Android/platform-tools
 
 alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
 alias jsgrep='find . -type f | grep \.js | xargs grep'
@@ -28,6 +28,9 @@ alias ftp-stop='sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.pl
 #pg
 alias pg-start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias pg-stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+
+#mongo
+alias mongo-start='mongod --config /usr/local/etc/mongod.conf &'
 
 alias :q=exit
 alias :qa='tmux kill-session'
