@@ -16,3 +16,5 @@
 	user = dbankier
 [core]
 	excludesfile = /Users/david/.gitignore_global
+[push]
+	default = simple
