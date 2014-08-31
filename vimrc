@@ -239,6 +239,7 @@ if has('autocmd')
   "Alloy stuff
   au BufRead *.tss set filetype=javascript
   au BufRead *.ltss set filetype=javascript
+  au BufRead *.stss set filetype=scss
   au BufRead *.jmk set filetype=javascript
   au BufRead *.ejs set filetype=html
   "au BufRead */controllers/*.js call OpenAlloy()
