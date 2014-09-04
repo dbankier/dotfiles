@@ -29,7 +29,6 @@ Bundle 'mattn/gist-vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'suan/vim-instant-markdown'
 "Syntax
-Bundle 'wookiehangover/jshint.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'elzr/vim-json'
 Bundle 'digitaltoad/vim-jade'
@@ -97,6 +96,17 @@ set wildignore+=*/build/**
 "reload files changed outside
 set autoread
 
+"simple status line (back) 
+if has('statusline')
+  set laststatus=2
+
+  set statusline=
+  set statusline +=%{fugitive#statusline()}
+  set statusline +=\ %<%F%*            "full path
+  set statusline +=%m%*                "modified flag
+  set statusline +=%=%5l%*             "current line
+  set statusline +=/%L%*               "total lines
+endif
 ""
 "" MAPPINGS
 ""
