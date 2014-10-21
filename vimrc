@@ -64,7 +64,7 @@ set directory^=~/.vim/_temp//      " where to put swap files.
 
 " Default theme
 syntax enable 
-colorscheme wombat256
+colorscheme Tomorrow-Night-Eighties 
 set number
 set ruler
 set encoding=utf-8
@@ -220,9 +220,9 @@ function! MDFix()
 endfunction
 if has('autocmd')
   " Change scheme and spell check based on file type
-  au BufEnter * colorscheme wombat256 | set nospell
-  au BufEnter *.markdown colorscheme peaksea | set spell
-  au BufEnter *.md colorscheme peaksea | set spell
+  au BufEnter * colorscheme Tomorrow-Night-Eighties | set nospell
+  au BufEnter *.markdown colorscheme Tomorrow | set spell
+  au BufEnter *.md colorscheme Tomorrow | set spell
   "Alloy stuff
   au BufRead *.tss set filetype=javascript
   au BufRead *.ltss set filetype=javascript
