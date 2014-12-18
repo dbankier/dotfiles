@@ -163,6 +163,8 @@ nnoremap <leader>lt :call OpenAlloyLTSS()<cr>
 inoremap <leader>lt <esc>:call OpenAlloyLTSS()<cr>
 nnoremap <leader>ls :call OpenAlloySTSS()<cr>
 inoremap <leader>ls <esc>:call OpenAlloySTSS()<cr>
+nnoremap <leader>la :call OpenNGBP()<cr>
+inoremap <leader>la <esc>:call OpenNGBP()<cr>
 vnoremap <leader>lp :w ! ts repl --pipe<cr>
 nnoremap <C-f> :CtrlP<cr>
 inoremap <C-f> <esc>:CtrlP<cr>
@@ -177,6 +179,7 @@ let g:tern#arguments = ["--no-port-file"]
 
 " Alloy - window splits for view, style and controller
 function! OpenAlloy()
+  only
   let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
   let s:style=substitute(expand('%:r'),"controllers","styles","").".tss" 
   exec '60vsp' s:style 
@@ -185,6 +188,7 @@ function! OpenAlloy()
   set filetype=jade
 endfunction
 function! OpenAlloyXML()
+  only
   let s:view=substitute(expand('%:r'),"controllers","views","").".xml" 
   let s:style=substitute(expand('%:r'),"controllers","styles","").".tss" 
   exec '60vsp' s:style 
@@ -194,6 +198,7 @@ function! OpenAlloyXML()
 endfunction
 
 function!  OpenAlloyLTSS()
+  only
   let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
   let s:style=substitute(expand('%:r'),"controllers","styles","").".ltss" 
   exec '60vsp' s:style 
@@ -203,12 +208,21 @@ function!  OpenAlloyLTSS()
 endfunction
 
 function!  OpenAlloySTSS()
+  only
   let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
   let s:style=substitute(expand('%:r'),"controllers","styles","").".stss" 
   exec '60vsp' s:style 
   set filetype=scss
   exec 'sp' s:view
   set filetype=jade
+endfunction
+
+function! OpenNGBP()
+  only
+  let s:view=expand('%:r').".tpl.html"
+  let s:style=expand('%:r').".less" 
+  exec '100vsp' s:style 
+  exec 'sp' s:view
 endfunction
 
 function! MDFix() 
