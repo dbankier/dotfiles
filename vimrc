@@ -17,13 +17,14 @@ Bundle 'Valloric/YouCompleteMe'
 " getting around
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'jeetsukumaran/vim-buffergator'
-Bundle 'kien/ctrlp.vim'
+Bundle 'Shougo/unite.vim'
 Bundle 'ZoomWin'
+Bundle 'rking/ag.vim'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'tpope/vim-unimpaired'
 " docs
+Bundle 'Shougo/vimproc.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'mattn/gist-vim'
 Bundle 'airblade/vim-gitgutter'
@@ -154,6 +155,22 @@ let g:loaded_netrwPlugin  = 1 " Disable netrw
 au VimEnter * if &filetype ==# '' | :NERDTreeToggle | endif
 au VimEnter * :wincmd p
 
+"ag
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--line-numbers --nogroup --nocolor'. 
+        \ ' --column --hidden --ignore .git --ignore node_modules'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+"unite
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#custom#profile('default', 'context', {
+      \   'start_insert': 1,
+      \   'winheight': 15,
+      \   'direction': 'botright',
+      \ })
+
 " vim clashes with iTerm2 on Command-T
 nnoremap <leader>lx :call OpenAlloyXML()<cr>
 inoremap <leader>lx <esc>:call OpenAlloyXML()<cr>
@@ -166,8 +183,9 @@ inoremap <leader>ls <esc>:call OpenAlloySTSS()<cr>
 nnoremap <leader>la :call OpenNGBP()<cr>
 inoremap <leader>la <esc>:call OpenNGBP()<cr>
 vnoremap <leader>lp :w ! ts repl --pipe<cr>
-nnoremap <C-f> :CtrlP<cr>
-inoremap <C-f> <esc>:CtrlP<cr>
+nnoremap <C-f> :<C-u>Unite file_rec/async buffer<cr>
+nnoremap <leader>f :<C-u>Unite grep:.<cr>
+inoremap <C-f> <esc>:Unite file_rec/async buffer<cr>
 
 " stop .tern-port commands
 let g:tern#arguments = ["--no-port-file"]
@@ -247,6 +265,8 @@ if has('autocmd')
   au BufRead,BufNewFile *.json set filetype=json 
   "Autoformatting off
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+  "Auto-remove trailing spaces on save
+  autocmd FileType javascript autocmd BufWritePre <buffer> :%s/\s\+$//e
 endif
 
 " closetag fix (for xml)
