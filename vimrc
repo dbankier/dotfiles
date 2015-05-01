@@ -159,12 +159,15 @@ au VimEnter * :wincmd p
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
   let g:unite_source_grep_default_opts = '--line-numbers --nogroup --nocolor'. 
-        \ ' --column --hidden --ignore .git --ignore node_modules'
+        \ ' --column --hidden --ignore ".git" --ignore "node_modules"'.
+        \ ' --ignore "build"'
   let g:unite_source_grep_recursive_opt = ''
+  let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
 endif
 
 "unite
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_length'])
 call unite#custom#profile('default', 'context', {
       \   'start_insert': 1,
       \   'winheight': 15,
@@ -189,6 +192,7 @@ inoremap <C-f> <esc>:Unite file_rec/async buffer<cr>
 
 " stop .tern-port commands
 let g:tern#arguments = ["--no-port-file"]
+let g:tern#command = ["/Users/david/.nvm/v0.10.30/bin/node", expand('<sfile>:h') . '/../node_modules/tern/bin/tern', '--no-port-file']
 
 
 ""
