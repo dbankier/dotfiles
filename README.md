@@ -8,8 +8,8 @@ I used these to kick start
 
  * [Vundle](https://github.com/gmarik/vundle) (No longer using janus)
    Install handled by install script
- * [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-   `curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh`
+ * [antigen](https://github.com/zsh-users/antigen)
+   Install handled by install script
  * [tmux](http://tmux.sourceforge.net/)
    can be installed: `brew install tmux`
  * [tmuxinator](https://github.com/aziz/tmuxinator)

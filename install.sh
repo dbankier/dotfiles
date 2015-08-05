@@ -31,9 +31,6 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
-echo "Copying zsh theme"
-cp $dir/db.zsh-theme ~/.oh-my-zsh/themes
-
 echo "Copying Battery script"
 sudo ln -s ~/dotfiles/battery /usr/bin/battery
 
