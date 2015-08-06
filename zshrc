@@ -4,8 +4,39 @@ antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
 antigen apply
 
+#History
+if [ -z "$HISTFILE" ]; then
+    HISTFILE=$HOME/.zsh_history
+fi
+
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Show history
+case $HIST_STAMPS in
+  "mm/dd/yyyy") alias history='fc -fl 1' ;;
+  "dd.mm.yyyy") alias history='fc -El 1' ;;
+  "yyyy-mm-dd") alias history='fc -il 1' ;;
+  *) alias history='fc -l 1' ;;
+esac
+
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history # share command history data
+
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/Users/david/bin:/usr/local/scala/bin:/usr/local/grails/bin:/Users/david/Android/tools:/Users/david/Android/platform-tools
+
+alias gst='git status'
+alias gd='git diff'
+alias gp='git push'
+alias gl='git pull'
+alias glog='git log'
 
 alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
 alias jsgrep='find . -type f | grep \.js | xargs grep'
