@@ -2,6 +2,7 @@ source ~/dotfiles/antigen.zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
+antigen bundle jocelynmallon/zshmarks
 antigen apply
 
 #History
@@ -32,11 +33,19 @@ setopt share_history # share command history data
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/Users/david/bin:/usr/local/scala/bin:/usr/local/grails/bin:/Users/david/Android/tools:/Users/david/Android/platform-tools
 
+# git alias
 alias gst='git status'
 alias gd='git diff'
 alias gp='git push'
 alias gl='git pull'
 alias glog='git log'
+
+# zshmarks
+
+alias g="jump"
+alias s="bookmark"
+alias d="deletemark"
+alias l="showmarks"
 
 alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
 alias jsgrep='find . -type f | grep \.js | xargs grep'
@@ -60,6 +69,7 @@ alias :q=exit
 alias :qa='tmux kill-session'
 
 alias doc2md='textutil -convert html file.doc -stdout | pandoc -f html -t markdown -o file.md'
+remindme() { echo $* > ~/.remindme }
 
 # Java versions switcher (OSX)
 alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'

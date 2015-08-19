@@ -28,6 +28,12 @@ snippet t
 ${1:/* condition */} ? ${2:a} : ${3:b}
 endsnippet
 
+snippet then
+.then(function(${1}) {
+  ${2}
+})
+endsnippet
+
 snippet rui "require definition"
 var $1 = require("/${2:ui}/${1}");
 endsnippet
