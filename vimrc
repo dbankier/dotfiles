@@ -17,7 +17,7 @@ Bundle 'Valloric/YouCompleteMe'
 " getting around
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'Shougo/unite.vim'
+Bundle 'kien/ctrlp.vim'
 Bundle 'ZoomWin'
 Bundle 'rking/ag.vim'
 Bundle 'christoomey/vim-tmux-navigator'
@@ -155,24 +155,8 @@ let g:loaded_netrwPlugin  = 1 " Disable netrw
 au VimEnter * if &filetype ==# '' | :NERDTreeToggle | endif
 au VimEnter * :wincmd p
 
-"ag
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--line-numbers --nogroup --nocolor'. 
-        \ ' --column --hidden --ignore ".git" --ignore "node_modules"'.
-        \ ' --ignore "build"'
-  let g:unite_source_grep_recursive_opt = ''
-  let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
-endif
-
-"unite
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_length'])
-call unite#custom#profile('default', 'context', {
-      \   'start_insert': 1,
-      \   'winheight': 15,
-      \   'direction': 'botright',
-      \ })
+"back to ctrlp
+let g:ctrlp_map ='<c-f>'
 
 " vim clashes with iTerm2 on Command-T
 nnoremap <leader>lx :call OpenAlloyXML()<cr>
@@ -186,9 +170,6 @@ inoremap <leader>ls <esc>:call OpenAlloySTSS()<cr>
 nnoremap <leader>la :call OpenNGBP()<cr>
 inoremap <leader>la <esc>:call OpenNGBP()<cr>
 vnoremap <leader>lp :w ! ts repl --pipe<cr>
-nnoremap <C-f> :<C-u>Unite file_rec/async buffer<cr>
-nnoremap <leader>f :<C-u>Unite grep:.<cr>
-inoremap <C-f> <esc>:Unite file_rec/async buffer<cr>
 
 " stop .tern-port commands
 let g:tern#arguments = ["--no-port-file"]

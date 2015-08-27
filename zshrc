@@ -31,7 +31,7 @@ setopt inc_append_history
 setopt share_history # share command history data
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/Users/david/bin:/usr/local/scala/bin:/usr/local/grails/bin:/Users/david/Android/tools:/Users/david/Android/platform-tools
+export PATH=/Users/david/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/usr/local/scala/bin::/Users/david/Android/tools:/Users/david/Android/platform-tools
 
 # git alias
 alias gst='git status'
