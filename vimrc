@@ -49,6 +49,7 @@ Bundle 'vim-scripts/YankRing.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'zerowidth/vim-copy-as-rtf'
 Bundle 'vim-scripts/closetag.vim'
+Bundle 'vim-scripts/gitignore'
 
 filetype plugin indent on
 
@@ -157,6 +158,7 @@ au VimEnter * :wincmd p
 
 "back to ctrlp
 let g:ctrlp_map ='<c-f>'
+let g:ctrlp_working_path_mode = 'rw'
 
 " vim clashes with iTerm2 on Command-T
 nnoremap <leader>lx :call OpenAlloyXML()<cr>
