@@ -32,6 +32,10 @@ setopt share_history # share command history data
 
 # Customize to your needs...
 export PATH=/Users/david/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/usr/local/scala/bin::/Users/david/Android/tools:/Users/david/Android/platform-tools
+export ANDROID_SDK="$HOME/Android"
+export ANDROID_NDK="$HOME/android-ndk-r9d"
+export ANDROID_PLATFORM="$ANDROID_SDK/platforms/android-23"
+export GOOGLE_APIS="$ANDROID_SDK/add-ons/addon-google_apis-google-23"
 
 # git alias
 alias gst='git status'
