@@ -52,7 +52,7 @@ alias d="deletemark"
 alias l="showmarks"
 
 alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
-alias jsgrep='find . -type f | grep \.js | xargs grep'
+alias jsgrep='find . -type f | grep \.js | grep -v node_modules | grep -v bower_components | xargs grep'
 alias scgrep='find . -type f | grep \.scala | xargs grep'
 
 export CLICOLOR=1
@@ -72,7 +72,7 @@ alias mongo-start='mongod --config /usr/local/etc/mongod.conf &'
 alias :q=exit
 alias :qa='tmux kill-session'
 
-alias doc2md='textutil -convert html file.doc -stdout | pandoc -f html -t markdown -o file.md'
+alias doc2md='pandoc -s ~/Desktop/file.docx -t markdown | pbcopy' 
 remindme() { echo $* > ~/.remindme }
 
 # Java versions switcher (OSX)
@@ -129,3 +129,5 @@ function kickbucket() {
   git push -u origin --all
   git push -u origin --tags
 }
+
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
