@@ -12,12 +12,11 @@ call vundle#rc()
 " required! 
 Bundle 'gmarik/vundle'
 Bundle 'SirVer/ultisnips'
-Bundle 'marijnh/tern_for_vim'
 Bundle 'Valloric/YouCompleteMe'
 " getting around
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'kien/ctrlp.vim'
+Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'ZoomWin'
 Bundle 'rking/ag.vim'
 Bundle 'christoomey/vim-tmux-navigator'
@@ -34,20 +33,18 @@ Bundle 'scrooloose/syntastic'
 Bundle 'elzr/vim-json'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'pangloss/vim-javascript'
-Bundle 'derekwyatt/vim-scala'
 Bundle 'leafgarland/typescript-vim'
+Bundle 'Quramy/tsuquyomi'
 Bundle 'tpope/vim-markdown'
 Bundle 'wavded/vim-stylus'
 Bundle 'mustache/vim-mode'
-Bundle 'groenewege/vim-less'
 Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'posva/vim-vue'
 " Quick text"
 Bundle 'tpope/vim-surround'
 Bundle 'mattn/emmet-vim'
-Bundle 'dbankier/SnappiTi.vim'
-Bundle 'vim-scripts/YankRing.vim'
+Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'terryma/vim-multiple-cursors'
-Bundle 'zerowidth/vim-copy-as-rtf'
 Bundle 'vim-scripts/closetag.vim'
 Bundle 'vim-scripts/gitignore'
 
@@ -69,6 +66,7 @@ syntax enable
 colorscheme Tomorrow-Night-Eighties 
 set number
 set ruler
+scriptencoding utf-8
 set encoding=utf-8
 
 " whitespace
@@ -119,12 +117,6 @@ nnoremap <leader>fef :normal! gg=G``<CR>$
 map <Down> gj$
 map <Up> gk
 
-" TiShadow Key Bindings
-:map <F6> <Esc>:w<CR>:!tishadow run --update<CR>a
-:imap <F6> <Esc>:w<CR>:!tishadow run --update<CR>a
-:map <S-F6> <Esc>:w<CR>:!tishadow run<CR>a
-:imap <S-F6> <Esc>:w<CR>:!tishadow run<CR>a
-
 " Slows down instant markdown
 let g:instant_markdown_slow = 1
 
@@ -157,7 +149,6 @@ au VimEnter * if &filetype ==# '' | :NERDTreeToggle | endif
 au VimEnter * :wincmd p
 
 "back to ctrlp
-let g:ctrlp_map ='<c-f>'
 let g:ctrlp_working_path_mode = 'rw'
 
 " vim clashes with iTerm2 on Command-T
@@ -165,18 +156,11 @@ nnoremap <leader>lx :call OpenAlloyXML()<cr>
 inoremap <leader>lx <esc>:call OpenAlloyXML()<cr>
 nnoremap <leader>lj :call OpenAlloy()<cr>
 inoremap <leader>lj <esc>:call OpenAlloy()<cr>
-nnoremap <leader>lt :call OpenAlloyLTSS()<cr>
-inoremap <leader>lt <esc>:call OpenAlloyLTSS()<cr>
 nnoremap <leader>ls :call OpenAlloySTSS()<cr>
 inoremap <leader>ls <esc>:call OpenAlloySTSS()<cr>
-nnoremap <leader>la :call OpenNGBP()<cr>
-inoremap <leader>la <esc>:call OpenNGBP()<cr>
 vnoremap <leader>lp :w ! ts repl --pipe<cr>
 
 " stop .tern-port commands
-let g:tern#arguments = ["--no-port-file"]
-let g:tern#command = ["/Users/david/.nvm/v0.10.30/bin/node", expand('<sfile>:h') . '/../node_modules/tern/bin/tern', '--no-port-file']
-
 
 ""
 "" AUTO COMMANDS
@@ -202,16 +186,6 @@ function! OpenAlloyXML()
   set filetype=xml
 endfunction
 
-function!  OpenAlloyLTSS()
-  only
-  let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
-  let s:style=substitute(expand('%:r'),"controllers","styles","").".ltss" 
-  exec '60vsp' s:style 
-  set filetype=javascript
-  exec 'sp' s:view
-  set filetype=jade
-endfunction
-
 function!  OpenAlloySTSS()
   only
   let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
@@ -222,21 +196,6 @@ function!  OpenAlloySTSS()
   set filetype=jade
 endfunction
 
-function! OpenNGBP()
-  only
-  let s:view=expand('%:r').".tpl.html"
-  let s:style=expand('%:r').".less" 
-  exec '100vsp' s:style 
-  exec 'sp' s:view
-endfunction
-
-function! MDFix() 
-  <esc>
-  %s/\^\(\d\)\^/<sup>\1<\/sup>/g
-  %s/\\\n\n//g
-  %s/\(\w\)\*\*\(\w\)/\1 \2/gc
-  %s/\(\w\+\*\)\(\w\)/\1 \2/gc
-endfunction
 if has('autocmd')
   " Change scheme and spell check based on file type
   au BufEnter * colorscheme Tomorrow-Night-Eighties | set nospell
@@ -246,7 +205,6 @@ if has('autocmd')
   au BufRead *.tss set filetype=javascript
   au BufRead *.ltss set filetype=javascript
   au BufRead *.stss set filetype=scss
-  au BufRead *.jmk set filetype=javascript
   au BufRead *.ejs set filetype=html
   "au BufRead */controllers/*.js call OpenAlloy()
   au BufRead,BufNewFile *.json set filetype=json 
@@ -274,7 +232,27 @@ function! g:UltiSnips_Complete()
   endif
   return ""
 endfunction
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+function! g:UltiSnips_Reverse()
+  call UltiSnips#JumpBackwards()
+  if g:ulti_jump_backwards_res == 0
+    return "\<C-P>"
+  endif
+
+  return ""
+endfunction
+
+
+if !exists("g:UltiSnipsJumpForwardTrigger")
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+endif
+
+if !exists("g:UltiSnipsJumpBackwardTrigger")
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+endif
+
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger       . " <C-R>=g:UltiSnips_Complete()<cr>"
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 let g:UltiSnipsSnippetsDir = '~/.vim/ultisnips/'
 let g:UltiSnipsSnippetDirectories = ['ultisnips']
 
@@ -282,3 +260,8 @@ let g:UltiSnipsSnippetDirectories = ['ultisnips']
 au InsertEnter * hi StatusLine ctermbg=52
 au InsertLeave * hi StatusLine ctermbg=8
 
+" typescript . triggers
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']

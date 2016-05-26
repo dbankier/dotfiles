@@ -1,8 +1,6 @@
 source ~/dotfiles/antigen.zsh
-antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
-antigen bundle jocelynmallon/zshmarks
 antigen apply
 
 #History
@@ -44,13 +42,6 @@ alias gp='git push'
 alias gl='git pull'
 alias glog='git log'
 
-# zshmarks
-
-alias g="jump"
-alias s="bookmark"
-alias d="deletemark"
-alias l="showmarks"
-
 alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
 alias jsgrep='find . -type f | grep \.js | grep -v node_modules | grep -v bower_components | xargs grep'
 alias scgrep='find . -type f | grep \.scala | xargs grep'
@@ -62,45 +53,24 @@ alias ll='ls -l'
 alias ftp-start='sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist'
 alias ftp-stop='sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.plist'
 
-#pg
-alias pg-start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias pg-stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-
 #mongo
 alias mongo-start='mongod --config /usr/local/etc/mongod.conf &'
 
 alias :q=exit
 alias :qa='tmux kill-session'
 
-alias doc2md='pandoc -s ~/Desktop/file.docx -t markdown | pbcopy' 
 remindme() { echo $* > ~/.remindme }
-
-# Java versions switcher (OSX)
-alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
-
-function java_use() {
-  export JAVA_HOME=$(/usr/libexec/java_home -v $1)
-  export PATH=$JAVA_HOME/bin:$PATH
-  java -version
-}
-
-java_use 1.6
-
 
 #vim key bindings
 bindkey -v
 export EDITOR='vim'
 
-# for pipe2eval vim plugin
-export PIP2EVAL_TMP_FILE_PATH=/tmp/shms
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 # for nvm
-source ~/.nvm/nvm.sh
+# source ~/.nvm/nvm.sh
+export PATH="$HOME/.nvm/versions/node/v4.4.4/bin:$PATH"
 
 # for ImageMagick
 export MAGICK_HOME="$HOME/ImageMagick-6.8.6"
