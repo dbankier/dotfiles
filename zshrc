@@ -29,7 +29,7 @@ setopt inc_append_history
 setopt share_history # share command history data
 
 # Customize to your needs...
-export PATH=/Users/david/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/usr/local/scala/bin::/Users/david/Android/tools:/Users/david/Android/platform-tools
+export PATH=/home/david/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/usr/local/scala/bin::/home/david/Android/tools:/home/david/Android/platform-tools
 export ANDROID_SDK="$HOME/Android"
 export ANDROID_NDK="$HOME/android-ndk-r9d"
 export ANDROID_PLATFORM="$ANDROID_SDK/platforms/android-23"
@@ -42,24 +42,20 @@ alias gp='git push'
 alias gl='git pull'
 alias glog='git log'
 
-alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
 alias jsgrep='find . -type f | grep \.js | grep -v node_modules | grep -v bower_components | xargs grep'
-alias scgrep='find . -type f | grep \.scala | xargs grep'
 
 export CLICOLOR=1
 alias ll='ls -l'
 
-#ftp
-alias ftp-start='sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist'
-alias ftp-stop='sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.plist'
-
-#mongo
-alias mongo-start='mongod --config /usr/local/etc/mongod.conf &'
-
 alias :q=exit
 alias :qa='tmux kill-session'
+alias vim='TERM=xterm-256color vim'
+
 
 remindme() { echo $* > ~/.remindme }
+
+#xming server
+export DISPLAY=:0
 
 #vim key bindings
 bindkey -v
@@ -70,12 +66,13 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # for nvm
 # source ~/.nvm/nvm.sh
-export PATH="$HOME/.nvm/versions/node/v4.4.4/bin:$PATH"
+export PATH="$HOME/.nvm/versions/node/v6.3.1/bin:$PATH"
 
 # for ImageMagick
 export MAGICK_HOME="$HOME/ImageMagick-6.8.6"
 export PATH="$MAGICK_HOME/bin:$PATH"
-export DYLD_LIBRARY_PATH=/Users/david/ImageMagick-6.8.6/lib
+export DYLD_LIBRARY_PATH=/home/david/ImageMagick-6.8.6/lib
+export PATH="$HOME/.nvm/versions/node/v6.2.0/bin:$PATH"
 
 # move/rename multiple files - http://www.mfasold.net/blog/2008/11/moving-or-renaming-multiple-files/
 autoload -U zmv
@@ -100,4 +97,5 @@ function kickbucket() {
   git push -u origin --tags
 }
 
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+#//export NVM_DIR="/home/david/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
