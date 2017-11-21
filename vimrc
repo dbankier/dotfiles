@@ -13,6 +13,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'artur-shaik/vim-javacomplete2'
 " getting around
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
@@ -76,9 +77,6 @@ set shiftwidth=2
 set expandtab
 set backspace=indent,eol,start
 
-" Remap escape key
-inoremap jk <esc>
-
 " Search
 set hlsearch
 set incsearch
@@ -111,7 +109,8 @@ endif
 "" MAPPINGS
 ""
 " format the entire file$
-nnoremap <leader>fef :normal! gg=G``<CR>$
+" nnoremap <leader>fef :normal! gg=G``<CR>$
+nnoremap <leader>fef :normal! gggqG<CR><C-o><C-o> 
 
 " Map the arrow keys to be based on display lines, not physical lines$
 map <Down> gj$
@@ -212,6 +211,7 @@ if has('autocmd')
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
   "Auto-remove trailing spaces on save
   autocmd FileType javascript autocmd BufWritePre <buffer> :%s/\s\+$//e
+  autocmd FileType java setlocal omnifunc=javacomplete#Complete
 endif
 
 " closetag fix (for xml)
@@ -259,6 +259,10 @@ let g:UltiSnipsSnippetDirectories = ['ultisnips']
 " change status line based on mode
 au InsertEnter * hi StatusLine ctermbg=52
 au InsertLeave * hi StatusLine ctermbg=8
+
+" prettier
+autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote 
+autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
 
 " typescript . triggers
 if !exists("g:ycm_semantic_triggers")
