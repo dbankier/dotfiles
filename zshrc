@@ -41,6 +41,7 @@ alias gd='git diff'
 alias gp='git push'
 alias gl='git pull'
 alias glog='git log'
+alias gac='git add . && git commit -m'
 
 alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
 alias jsgrep='find . -type f | grep \.js | grep -v node_modules | grep -v bower_components | xargs grep'
@@ -69,13 +70,13 @@ export EDITOR='vim'
 export PATH="/usr/local/heroku/bin:$PATH"
 
 # for nvm
-# source ~/.nvm/nvm.sh
-export PATH="$HOME/.nvm/versions/node/v4.4.4/bin:$PATH"
+source ~/.nvm/nvm.sh
 
 # for ImageMagick
 export MAGICK_HOME="$HOME/ImageMagick-6.8.6"
 export PATH="$MAGICK_HOME/bin:$PATH"
 export DYLD_LIBRARY_PATH=/Users/david/ImageMagick-6.8.6/lib
+export PATH="/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support:$PATH"
 
 # move/rename multiple files - http://www.mfasold.net/blog/2008/11/moving-or-renaming-multiple-files/
 autoload -U zmv
@@ -87,10 +88,10 @@ function kickbucket() {
   read username
 
   stty_orig=`stty -g`
-  stty -echo        
+  stty -echo
   echo "Password:"
   read password
-  stty $stty_orig  
+  stty $stty_orig
 
   echo "Repository Name:"
   read repo
@@ -100,4 +101,20 @@ function kickbucket() {
   git push -u origin --tags
 }
 
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+function setjdk() {
+  if [ $# -ne 0 ]; then
+   removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
+   if [ -n "${JAVA_HOME+x}" ]; then
+    removeFromPath $JAVA_HOME
+   fi
+   export JAVA_HOME=`/usr/libexec/java_home -v $@`
+   export PATH=$JAVA_HOME/bin:$PATH
+  fi
+ }
+ function removeFromPath() {
+  export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
+ }
