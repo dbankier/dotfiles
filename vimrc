@@ -9,11 +9,10 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'artur-shaik/vim-javacomplete2'
 " getting around
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
@@ -63,8 +62,8 @@ set backupdir^=~/.vim/_backup//    " where to put backup files.
 set directory^=~/.vim/_temp//      " where to put swap files.
 
 " Default theme
-syntax enable 
-colorscheme Tomorrow-Night-Eighties 
+syntax enable
+colorscheme Tomorrow-Night-Eighties
 set number
 set ruler
 scriptencoding utf-8
@@ -94,7 +93,7 @@ set wildignore+=*/build/**,*/node_modules/**,*/vendor/**
 "reload files changed outside
 set autoread
 
-"simple status line (back) 
+"simple status line (back)
 if has('statusline')
   set laststatus=2
 
@@ -109,8 +108,7 @@ endif
 "" MAPPINGS
 ""
 " format the entire file$
-" nnoremap <leader>fef :normal! gg=G``<CR>$
-nnoremap <leader>fef :normal! gggqG<CR><C-o><C-o> 
+nnoremap <leader>fef :normal! gggqG<CR><C-o><C-o>
 
 " Map the arrow keys to be based on display lines, not physical lines$
 map <Down> gj$
@@ -168,18 +166,18 @@ vnoremap <leader>lp :w ! ts repl --pipe<cr>
 " Alloy - window splits for view, style and controller
 function! OpenAlloy()
   only
-  let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
-  let s:style=substitute(expand('%:r'),"controllers","styles","").".tss" 
-  exec '60vsp' s:style 
+  let s:view=substitute(expand('%:r'),"controllers","views","").".jade"
+  let s:style=substitute(expand('%:r'),"controllers","styles","").".tss"
+  exec '60vsp' s:style
   set filetype=javascript
   exec 'sp' s:view
   set filetype=jade
 endfunction
 function! OpenAlloyXML()
   only
-  let s:view=substitute(expand('%:r'),"controllers","views","").".xml" 
-  let s:style=substitute(expand('%:r'),"controllers","styles","").".tss" 
-  exec '60vsp' s:style 
+  let s:view=substitute(expand('%:r'),"controllers","views","").".xml"
+  let s:style=substitute(expand('%:r'),"controllers","styles","").".tss"
+  exec '60vsp' s:style
   set filetype=javascript
   exec 'sp' s:view
   set filetype=xml
@@ -187,9 +185,9 @@ endfunction
 
 function!  OpenAlloySTSS()
   only
-  let s:view=substitute(expand('%:r'),"controllers","views","").".jade" 
-  let s:style=substitute(expand('%:r'),"controllers","styles","").".stss" 
-  exec '60vsp' s:style 
+  let s:view=substitute(expand('%:r'),"controllers","views","").".jade"
+  let s:style=substitute(expand('%:r'),"controllers","styles","").".stss"
+  exec '60vsp' s:style
   set filetype=scss
   exec 'sp' s:view
   set filetype=jade
@@ -206,12 +204,11 @@ if has('autocmd')
   au BufRead *.stss set filetype=scss
   au BufRead *.ejs set filetype=html
   "au BufRead */controllers/*.js call OpenAlloy()
-  au BufRead,BufNewFile *.json set filetype=json 
+  au BufRead,BufNewFile *.json set filetype=json
   "Autoformatting off
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
   "Auto-remove trailing spaces on save
   autocmd FileType javascript autocmd BufWritePre <buffer> :%s/\s\+$//e
-  autocmd FileType java setlocal omnifunc=javacomplete#Complete
 endif
 
 " closetag fix (for xml)
@@ -261,7 +258,7 @@ au InsertEnter * hi StatusLine ctermbg=52
 au InsertLeave * hi StatusLine ctermbg=8
 
 " prettier
-autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote 
+autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote
 autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
 
 " typescript . triggers
