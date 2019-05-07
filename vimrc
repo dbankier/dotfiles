@@ -1,52 +1,51 @@
 ""
 "" VUNDLE START
 ""
+if has('python3')
+  silent! python3 1
+endif
 
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
-Bundle 'SirVer/ultisnips'
-Bundle 'Valloric/YouCompleteMe'
+Plug 'SirVer/ultisnips'
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 " getting around
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'ZoomWin'
-Bundle 'rking/ag.vim'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'vim-scripts/camelcasemotion'
-Bundle 'tpope/vim-unimpaired'
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'rking/ag.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vim-scripts/camelcasemotion'
+Plug 'tpope/vim-unimpaired'
+Plug 'RRethy/vim-illuminate'
 " docs
-Bundle 'Shougo/vimproc.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'mattn/gist-vim'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'suan/vim-instant-markdown'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'airblade/vim-gitgutter'
+Plug 'suan/vim-instant-markdown'
 "Syntax
-Bundle 'scrooloose/syntastic'
-Bundle 'elzr/vim-json'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'pangloss/vim-javascript'
-Bundle 'leafgarland/typescript-vim'
-Bundle 'Quramy/tsuquyomi'
-Bundle 'tpope/vim-markdown'
-Bundle 'wavded/vim-stylus'
-Bundle 'mustache/vim-mode'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'posva/vim-vue'
+Plug 'prettier/vim-prettier'
+Plug 'w0rp/ale'
+Plug 'elzr/vim-json'
+Plug 'digitaltoad/vim-jade'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'tpope/vim-markdown'
+Plug 'wavded/vim-stylus'
+Plug 'mustache/vim-mode'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'posva/vim-vue'
 " Quick text"
-Bundle 'tpope/vim-surround'
-Bundle 'mattn/emmet-vim'
-Bundle 'maxbrunsfeld/vim-yankstack'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'vim-scripts/closetag.vim'
-Bundle 'vim-scripts/gitignore'
+Plug 'tpope/vim-surround'
+Plug 'mattn/emmet-vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'alvan/closetag.vim'
+Plug 'vim-scripts/gitignore'
+Plug 'zerowidth/vim-copy-as-rtf'
+call plug#end()
+
 
 filetype plugin indent on
 
@@ -98,7 +97,6 @@ if has('statusline')
   set laststatus=2
 
   set statusline=
-  set statusline +=%{fugitive#statusline()}
   set statusline +=\ %<%F%*            "full path
   set statusline +=%m%*                "modified flag
   set statusline +=%=%5l%*             "current line
@@ -129,14 +127,6 @@ sunmap w
 sunmap b
 sunmap e
 
-"fugitive
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gl :Glog<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gp :Gpush<CR>
-
 "nerdtree
 noremap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 let g:NERDTreeHijackNetrw = 0 " Stop NERDTree from hijacking netrw
@@ -145,34 +135,27 @@ let g:loaded_netrwPlugin  = 1 " Disable netrw
 au VimEnter * if &filetype ==# '' | :NERDTreeToggle | endif
 au VimEnter * :wincmd p
 
-"back to ctrlp
-let g:ctrlp_working_path_mode = 'rw'
+"back to fzf
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+nnoremap <c-p> :FZF<cr>
+
 
 " vim clashes with iTerm2 on Command-T
 nnoremap <leader>lx :call OpenAlloyXML()<cr>
 inoremap <leader>lx <esc>:call OpenAlloyXML()<cr>
-nnoremap <leader>lj :call OpenAlloy()<cr>
-inoremap <leader>lj <esc>:call OpenAlloy()<cr>
 nnoremap <leader>ls :call OpenAlloySTSS()<cr>
 inoremap <leader>ls <esc>:call OpenAlloySTSS()<cr>
 vnoremap <leader>lp :w ! ts repl --pipe<cr>
 
-" stop .tern-port commands
 
 ""
 "" AUTO COMMANDS
 ""
 
 " Alloy - window splits for view, style and controller
-function! OpenAlloy()
-  only
-  let s:view=substitute(expand('%:r'),"controllers","views","").".jade"
-  let s:style=substitute(expand('%:r'),"controllers","styles","").".tss"
-  exec '60vsp' s:style
-  set filetype=javascript
-  exec 'sp' s:view
-  set filetype=jade
-endfunction
 function! OpenAlloyXML()
   only
   let s:view=substitute(expand('%:r'),"controllers","views","").".xml"
@@ -200,7 +183,6 @@ if has('autocmd')
   au BufEnter *.md colorscheme Tomorrow | set spell
   "Alloy stuff
   au BufRead *.tss set filetype=javascript
-  au BufRead *.ltss set filetype=javascript
   au BufRead *.stss set filetype=scss
   au BufRead *.ejs set filetype=html
   "au BufRead */controllers/*.js call OpenAlloy()
@@ -214,55 +196,15 @@ endif
 " closetag fix (for xml)
 let b:unaryTagsStack=""
 
-" Making UltiSnips and YouCompleteMe play nicely
-function! g:UltiSnips_Complete()
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res == 0
-    if pumvisible()
-      return "\<C-n>"
-    else
-      call UltiSnips#JumpForwards()
-      if g:ulti_jump_forwards_res == 0
-        return "\<TAB>"
-      endif
-    endif
-  endif
-  return ""
-endfunction
-
-function! g:UltiSnips_Reverse()
-  call UltiSnips#JumpBackwards()
-  if g:ulti_jump_backwards_res == 0
-    return "\<C-P>"
-  endif
-
-  return ""
-endfunction
-
-
-if !exists("g:UltiSnipsJumpForwardTrigger")
-  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-endif
-
-if !exists("g:UltiSnipsJumpBackwardTrigger")
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-endif
-
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger       . " <C-R>=g:UltiSnips_Complete()<cr>"
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-let g:UltiSnipsSnippetsDir = '~/.vim/ultisnips/'
-let g:UltiSnipsSnippetDirectories = ['ultisnips']
-
 " change status line based on mode
 au InsertEnter * hi StatusLine ctermbg=52
 au InsertLeave * hi StatusLine ctermbg=8
 
-" prettier
-autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote
-autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
-
-" typescript . triggers
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
+" Ale
+let g:ale_completion_enabled = 1
+" Prettier
+let g:prettier#config#trailing_comma = 'none'
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#single_quote = 'true'
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
