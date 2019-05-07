@@ -31,7 +31,8 @@ setopt share_history # share command history data
 # Customize to your needs...
 export PATH=/Users/david/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/usr/local/scala/bin::/Users/david/Android/tools:/Users/david/Android/platform-tools
 export ANDROID_SDK="$HOME/Android"
-export ANDROID_NDK="$HOME/android-ndk-r9d"
+export ANDROID_HOME="$HOME/Android"
+export ANDROID_NDK="$HOME/android-ndk-r15c"
 export ANDROID_PLATFORM="$ANDROID_SDK/platforms/android-23"
 export GOOGLE_APIS="$ANDROID_SDK/add-ons/addon-google_apis-google-23"
 
@@ -118,3 +119,10 @@ function setjdk() {
  function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
  }
+
+export FZF_DEFAULT_COMMAND='ag -g ""'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/david/.sdkman"
+[[ -s "/Users/david/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/david/.sdkman/bin/sdkman-init.sh"
