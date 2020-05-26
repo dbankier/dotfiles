@@ -1,6 +1,10 @@
 source ~/dotfiles/antigen.zsh
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
+antigen bundle zsh-users/zsh-syntax-highlighting 
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-history-substring-search
+
 antigen apply
 
 #History
@@ -44,16 +48,10 @@ alias gl='git pull'
 alias glog='git log'
 alias gac='git add . && git commit -m'
 
-alias minify='find . | grep ".js" | grep -v ".lib" | grep -v ".json" | xargs -I{} java -jar ~/Javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar --preserve-semi -o {} {}'
 alias jsgrep='find . -type f | grep \.js | grep -v node_modules | grep -v bower_components | xargs grep'
-alias scgrep='find . -type f | grep \.scala | xargs grep'
 
 export CLICOLOR=1
 alias ll='ls -l'
-
-#ftp
-alias ftp-start='sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist'
-alias ftp-stop='sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.plist'
 
 #mongo
 alias mongo-start='mongod --config /usr/local/etc/mongod.conf &'
@@ -70,8 +68,31 @@ export EDITOR='vim'
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+export NVM_DIR=~/.nvm
 # for nvm
-source ~/.nvm/nvm.sh
+function _install_nvm() {
+  unset -f nvm npm node
+  # Set up "nvm" could use "--no-use" to defer setup, but we are here to use it
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This sets up nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # nvm bash_completion
+  "$@"
+}
+
+function nvm() {
+    _install_nvm nvm "$@"
+}
+
+function npm() {
+    _install_nvm npm "$@"
+}
+
+function node() {
+    _install_nvm node "$@"
+}
+
+function grunt() {
+    _install_nvm grunt "$@"
+}
 
 # for ImageMagick
 export MAGICK_HOME="$HOME/ImageMagick-6.8.6"
@@ -83,46 +104,10 @@ export PATH="/Applications/Xcode.app/Contents/Applications/Application Loader.ap
 autoload -U zmv
 alias mmv='noglob zmv -W'
 
-# originally based on - https://bitbucket.org/hannesr/fillbucket/src/241495090d75dddfe9842ef2c60df968190dccf4/fillbucket?at=master
-function kickbucket() {
-  echo "Username:"
-  read username
-
-  stty_orig=`stty -g`
-  stty -echo
-  echo "Password:"
-  read password
-  stty $stty_orig
-
-  echo "Repository Name:"
-  read repo
-  curl --user $username:$password https://api.bitbucket.org/1.0/repositories/ --data name=$repo --data is_private='true'
-  git remote add origin https://$username@bitbucket.org/$username/${repo// /-}.git
-  git push -u origin --all
-  git push -u origin --tags
-}
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-function setjdk() {
-  if [ $# -ne 0 ]; then
-   removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
-   if [ -n "${JAVA_HOME+x}" ]; then
-    removeFromPath $JAVA_HOME
-   fi
-   export JAVA_HOME=`/usr/libexec/java_home -v $@`
-   export PATH=$JAVA_HOME/bin:$PATH
-  fi
- }
- function removeFromPath() {
-  export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
- }
+# for fish-like history up search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/david/.sdkman"
-[[ -s "/Users/david/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/david/.sdkman/bin/sdkman-init.sh"

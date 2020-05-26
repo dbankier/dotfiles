@@ -105,15 +105,10 @@ endif
 ""
 "" MAPPINGS
 ""
-" format the entire file$
-nnoremap <leader>fef :normal! gggqG<CR><C-o><C-o>
 
 " Map the arrow keys to be based on display lines, not physical lines$
 map <Down> gj$
 map <Up> gk
-
-" Slows down instant markdown
-let g:instant_markdown_slow = 1
 
 " reselect visual block after indent/outdent via: tilvim.com
 vnoremap < <gv
