@@ -52,9 +52,12 @@ alias jsgrep='find . -type f | grep \.js | grep -v node_modules | grep -v bower_
 
 export CLICOLOR=1
 alias ll='ls -l'
+alias lc='colorls -A --sd'
+
+alias vim='node -v && /usr/local/bin/vim'
 
 #mongo
-alias mongo-start='mongod --config /usr/local/etc/mongod.conf &'
+alias mongo-start='ulimit -n 1024 && mongod --config /usr/local/etc/mongod.conf &'
 
 alias :q=exit
 alias :qa='tmux kill-session'
@@ -88,10 +91,6 @@ function npm() {
 
 function node() {
     _install_nvm node "$@"
-}
-
-function grunt() {
-    _install_nvm grunt "$@"
 }
 
 # for ImageMagick

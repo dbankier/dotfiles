@@ -11,22 +11,19 @@ filetype off                   " required!
 call plug#begin('~/.vim/plugged')
 
 Plug 'SirVer/ultisnips'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', { 'branch': 'release'}
 " getting around
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'rking/ag.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-scripts/camelcasemotion'
-Plug 'tpope/vim-unimpaired'
 Plug 'RRethy/vim-illuminate'
 " docs
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'airblade/vim-gitgutter'
-Plug 'suan/vim-instant-markdown'
 "Syntax
 Plug 'prettier/vim-prettier'
-Plug 'w0rp/ale'
 Plug 'elzr/vim-json'
 Plug 'digitaltoad/vim-jade'
 Plug 'pangloss/vim-javascript'
@@ -39,11 +36,13 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'posva/vim-vue'
 " Quick text"
 Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'alvan/closetag.vim'
 Plug 'vim-scripts/gitignore'
 Plug 'zerowidth/vim-copy-as-rtf'
+" Just nice
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 
@@ -137,6 +136,15 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 nnoremap <c-p> :FZF<cr>
 
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
 
 " vim clashes with iTerm2 on Command-T
 nnoremap <leader>lx :call OpenAlloyXML()<cr>
@@ -173,9 +181,9 @@ endfunction
 
 if has('autocmd')
   " Change scheme and spell check based on file type
-  au BufEnter * colorscheme Tomorrow-Night-Eighties | set nospell
-  au BufEnter *.markdown colorscheme Tomorrow | set spell
-  au BufEnter *.md colorscheme Tomorrow | set spell
+  au BufEnter *  set nospell
+  au BufEnter *.markdown  set spell
+  au BufEnter *.md set spell
   "Alloy stuff
   au BufRead *.tss set filetype=javascript
   au BufRead *.stss set filetype=scss
@@ -190,13 +198,13 @@ endif
 
 " closetag fix (for xml)
 let b:unaryTagsStack=""
+let g:closetag_filetypes = 'html,xhtml,phtml,vue'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx,vue'
 
 " change status line based on mode
 au InsertEnter * hi StatusLine ctermbg=52
 au InsertLeave * hi StatusLine ctermbg=8
 
-" Ale
-let g:ale_completion_enabled = 1
 " Prettier
 let g:prettier#config#trailing_comma = 'none'
 let g:prettier#config#bracket_spacing = 'true'
