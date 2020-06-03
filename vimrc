@@ -18,28 +18,23 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'rking/ag.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-scripts/camelcasemotion'
-Plug 'RRethy/vim-illuminate'
+
 " docs
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'airblade/vim-gitgutter'
+
 "Syntax
 Plug 'prettier/vim-prettier'
-Plug 'elzr/vim-json'
 Plug 'digitaltoad/vim-jade'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
-Plug 'tpope/vim-markdown'
-Plug 'wavded/vim-stylus'
 Plug 'mustache/vim-mode'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'posva/vim-vue'
+
 " Quick text"
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'alvan/closetag.vim'
 Plug 'vim-scripts/gitignore'
 Plug 'zerowidth/vim-copy-as-rtf'
+
 " Just nice
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
@@ -48,11 +43,13 @@ call plug#end()
 
 filetype plugin indent on
 
+
 ""
 "" SETTINGS
 ""
 
 " clipboard
+set hidden
 set clipboard=unnamed
 
 " backup and swap dirs
@@ -64,6 +61,8 @@ syntax enable
 colorscheme Tomorrow-Night-Eighties
 set number
 set ruler
+set cmdheight=2
+set updatetime=300
 scriptencoding utf-8
 set encoding=utf-8
 

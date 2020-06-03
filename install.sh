@@ -31,16 +31,7 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
-echo "Copying Battery script"
-sudo ln -s ~/dotfiles/battery /usr/bin/battery
-
-echo "Installing Vundle"
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-echo "Install Vundle Bundles"
-vim +BundleInstall +qall
-echo "Installing tern_for_vim"
-
-cd ~/.vim/bundle/tern_for_vim && `which npm` install 
-echo "Installing YouCompleteMe"
-cd ~/.vim/bundle/YouCompleteMe && ./install.sh
+echo "Installing Plug"
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
