@@ -18,6 +18,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'rking/ag.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-scripts/camelcasemotion'
+Plug 'github/copilot.vim'
 
 " docs
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -27,6 +28,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'prettier/vim-prettier'
 Plug 'digitaltoad/vim-jade'
 Plug 'mustache/vim-mode'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'udalov/kotlin-vim'
 
 " Quick text"
 Plug 'tpope/vim-surround'
@@ -34,6 +38,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'alvan/closetag.vim'
 Plug 'vim-scripts/gitignore'
 Plug 'zerowidth/vim-copy-as-rtf'
+Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --frozen-lockfile && yarn compile' }
 
 " Just nice
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -195,10 +200,11 @@ if has('autocmd')
   autocmd FileType javascript autocmd BufWritePre <buffer> :%s/\s\+$//e
 endif
 
-" closetag fix (for xml)
-let b:unaryTagsStack=""
-let g:closetag_filetypes = 'html,xhtml,phtml,vue'
-let g:closetag_xhtml_filetypes = 'xhtml,jsx,vue'
+
+let g:closetag_filetypes = 'html,xhtml,jsx,javascript'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'
 
 " change status line based on mode
 au InsertEnter * hi StatusLine ctermbg=52
@@ -209,4 +215,5 @@ let g:prettier#config#trailing_comma = 'none'
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#single_quote = 'true'
 let g:prettier#autoformat = 0
+
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
